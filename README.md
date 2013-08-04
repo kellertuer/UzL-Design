@@ -17,7 +17,7 @@ Das alte Repository für das LaTeX-Beamer-Theme ist hier ebenso enthalten,
 es besitzt eine eigene Readme
 
 ## Poster
-Aufbauen auf dem LaTeX-Theme ein Ansatz für ein Poster, zweispaltig.
+Aufbauen auf dem LaTeX-Theme ein Ansatz für ein Poster, zweispaltig in den Beispielen zum LaTeX-Beamer-Theme.
 
 ## Lizenz
 
