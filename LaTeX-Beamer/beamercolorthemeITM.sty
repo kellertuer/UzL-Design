@@ -1,0 +1,59 @@
+%
+% The color scheme for UzL, using colors from the handbook, coloring example boxes green, alerts red.
+%
+% Published under Beeware-License:
+%
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+% can do whatever you want with this stuff. If we meet some day, and you think 
+% this stuff is worth it, you can buy me a beer or coffee in return.
+%
+% Lukas ruge@itm.uni-luebeck.de then took all of this and played with it until it looked like he wanted. This is not the 
+% original theme but a play on it.
+% It throws a shit load of warnings, which are all his fault so all beer and coffee for this goes to Ronny, the blame 
+% can rest on Lukas.
+%
+
+\ProvidesPackage{beamercolorthemeITM}[2011/10/05 v1.0 beamer color theme in the corporate design of the University of Luebeck]
+
+\mode<presentation>
+
+\setbeamercolor*{structure}{fg=uzlmain,bg=white}
+% Color
+
+\setbeamercolor*{palette primary}{use=structure,fg=uzlmain,bg=white}
+\setbeamercolor*{palette secondary}{use=structure,fg=uzlmain,bg=structure.bg}
+\setbeamercolor*{palette tertiary}{use=structure,fg=uzlmain,bg=structure.bg}
+\setbeamercolor*{palette quaternary}{fg=uzlmain,bg=uzlmain!25!white}
+
+\setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+\setbeamercolor{institute}{fg=black}
+\setbeamercolor{date}{fg=black}
+\setbeamercolor{subtitle}{fg=uzlmain!50!white}
+\setbeamercolor{frame subtitle}{fg=uzlmain!50!white}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor*{example text}{bg=uzlgreen}
+\setbeamercolor*{alerted text}{fg=uzlred}
+
+\setbeamercolor*{block title}{use=structure,fg=white,bg=uzlmain!50!white}
+\setbeamercolor*{block title alerted}{use=alerted text,fg=black,bg=alerted text.bg!75!white}
+\setbeamercolor*{block title example}{use=example text,fg=black,bg=example text.bg!75!white}
+
+\setbeamercolor*{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+\setbeamercolor*{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor*{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+\setbeamercolor*{author in head/foot}{parent=palette quarternary, fg=white, bg=uzlmain}
+\setbeamercolor*{title in head/foot}{parent=palette quarternary, fg=white, bg=uzlmain}
+\setbeamercolor*{date in head/foot}{parent=palette quarternary, fg=white, bg=uzlmain}
+
+\setbeamercolor*{section in head/foot}{parent=palette tertiary, fg=uzlmain,bg=white}
+\setbeamercolor*{subsection in head/foot}{parent=palette primary,fg=uzlmain,bg=white}
+
+\mode
+<all>

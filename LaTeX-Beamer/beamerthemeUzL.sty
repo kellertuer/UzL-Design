@@ -1,0 +1,207 @@
+%
+% Main Theme File
+%
+% Declaration of Options, definition of specific commands the the design elements,
+% such as headline, footline and frametitle
+%
+% Published under Beeware-License:
+%
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+% can do whatever you want with this stuff. If we meet some day, and you think 
+% this stuff is worth it, you can buy me a beer or coffee in return.
+
+\ProvidesPackage{beamerthemeUzL}[2010/12/10 v0.91 beamer theme in the corporate design of the University of Luebeck]
+\RequirePackage{ifthen}
+\RequirePackage{calc}
+%
+%
+% Global Color Definitions
+%
+\definecolor{uzlmain}{RGB}{0,75,90}
+\definecolor{uzlgreen}{RGB}{160,187,47} % Corporate: #A0BB2F
+%\definecolor{uzlgreen}{RGB}{7,98,57} % Lukas: #076239
+\definecolor{uzlred}{RGB}{195,24,53} % Corporate #C31835
+%\definecolor{uzlred}{RGB}{91,15,0} % Lukas: #5b0f00
+
+\mode<presentation>
+%
+%  Option: Choose a theme
+%
+\newcounter{UzL@Theme}
+\setcounter{UzL@Theme}{0}% Use UzL
+%
+%\DeclareOptionBeamer{theme}[UzL]{
+%\ifx\equal{#1}{UzL}%
+%\setcounter{UzL@Theme}{0}%
+%\fi%
+%\ifx\equal{#1}{ITM}%
+%\setcounter{UzL@Theme}{1}%
+%\fi%
+%}
+%\ExecuteOptionsBeamer{theme=UzL}
+%alternative commands
+\DeclareOptionBeamer{UzLtheme}{\setcounter{UzL@Theme}{0}}
+\DeclareOptionBeamer{ITMtheme}{\setcounter{UzL@Theme}{1}}
+
+
+
+%
+%  Option: Display Footline on_/off
+%
+\newif\ifUzL@showfootline%
+%
+\DeclareOptionBeamer{footline}[true]{\csname UzL@showfootline#1\endcsname}
+\ExecuteOptionsBeamer{footline=true}
+%
+\DeclareOptionBeamer{displayfootline}{\Uzl@showfootlinetrue}
+\DeclareOptionBeamer{hidefootline}{\Uzl@showfootlinefalse}
+%
+%  Option: Display Slogan on_/off
+%
+\newif\ifUzL@showslogan%
+%
+\DeclareOptionBeamer{slogan}[true]{\csname UzL@showslogan#1\endcsname}
+\ExecuteOptionsBeamer{slogan=true}
+%alternative commands
+\DeclareOptionBeamer{displayslogan}{\Uzl@showslogantrue}
+\DeclareOptionBeamer{hideslogan}{\Uzl@showsloganfalse}
+
+%
+%  Option: Use Myriad on_/off
+%
+\newif\ifUzL@useMyriad%
+%
+\DeclareOptionBeamer{myriad}[true]{\csname UzL@useMyriad#1\endcsname}
+\ExecuteOptionsBeamer{myriad=true}
+% alternate commands
+\DeclareOptionBeamer{usemyriad}{\Uzl@useMyriadtrue}
+\DeclareOptionBeamer{nomyriad}{\Uzl@useMyriadfalse}
+
+%
+%  Option: Display Total Frame Number in Footline (only inf visible) on_/off
+%
+\newif\ifUzL@displayTotalFramenumber%
+%
+\DeclareOptionBeamer{frametotal}[true]{\csname UzL@displayTotalFrameNumber#1\endcsname}
+\ExecuteOptionsBeamer{frametotal}
+% alternate
+\DeclareOptionBeamer{displayframetotal}{\Uzl@displayTotalFrameNumbertrue}
+\DeclareOptionBeamer{hideframetotal}{\Uzl@displayTotalFrameNumberfalse}
+
+%
+%  Option: Display Total Frame Number in Footline (only inf visible) on_/off
+%
+\newif\ifUzL@displayNavigation%
+%
+\DeclareOptionBeamer{navigation}[true]{\csname UzL@displayNavigation#1\endcsname}
+\ExecuteOptionsBeamer{navigation}
+\DeclareOptionBeamer{hidenavigation}{\UzL@displayNavigationfalse}
+\DeclareOptionBeamer{displaynavigation}{\UzL@displayNavigationtrue}
+
+%
+% Logo Option, define Logo number directly or by using some of logocount <=3
+%
+%
+\newcounter{UzL@logonum}
+\setcounter{UzL@logonum}{1}%
+\newif\ifUzL@logoOneused%
+\UzL@logoOneusedfalse%
+\newif\ifUzL@logoTwoused%
+\UzL@logoTwousedfalse%
+\newif\ifUzL@logoThreeused%
+\UzL@logoThreeusedfalse%
+
+%
+% Internal measurements
+%
+\newlength{\UzL@innerwidth}
+\setlength{\UzL@innerwidth}{.95\paperwidth}
+\newlength{\UzL@headheight}
+\setlength{\UzL@headheight}{.1\paperheight}
+
+\ProcessOptionsBeamer
+
+% After Processing Options the variable is correct so load Myriad (Standard)
+\ifUzL@useMyriad
+\RequirePackage[no-math]{fontspec} 
+\RequirePackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+\setsansfont[Ligatures={Common}]{Myriad Pro}
+\RequirePackage{MnSymbol}
+\fi
+
+%
+% Logo stuff
+%
+
+%
+% Set the logo specified with the first number to the width of second calue and image third
+\newcommand{\setlogo}[3]{%
+	\ifx#3\@empty%
+		\clearlogo{#1}%
+	\else%
+		\setcounter{UzL@logonum}{\maxof{\value{UzL@logonum}}{#1}}
+		\ifcase #1 %0 do nothing
+		\PackageError{beamerthemeUzL}{A Logo 0 can't be defined.}{The Logo index should be between including 1 and 3.}
+		\or %1
+		\pgfdeclareimage[width=#2]{UzLlogo1}{#3}%
+		\UzL@logoOneusedtrue%
+		\or %2
+		\pgfdeclareimage[width=#2]{UzLlogo2}{#3}%
+		\UzL@logoTwousedtrue%
+		\or %3
+		\pgfdeclareimage[width=#2]{UzLlogo3}{#3}%
+		\UzL@logoThreeusedtrue%
+		\else
+		\PackageError{beamerthemeUzL}{A Logo #1 can't be defined.}{The Logo index should be between including 1 and 3.}
+		\fi
+}
+\newcommand{\clearlogo}[1]{%
+	\ifnum\value{UzL@logonum}=#1
+	 \addtocounter{UzL@logonum}{-1}
+	\fi%
+	\ifnum\value{UzL@logonum}=0
+		\setlength{\UzL@headheight}{.025\paperheight}
+	\else
+		\setlength{\UzL@headheight}{.1\paperheight}
+	\fi
+	\ifcase #1 %0 clear specific image
+	\PackageError{beamerthemeUzL}{A Logo 0 can't be deleted.}{The Logo index should be between including 1 and 3.}
+		\or %1
+			\pgfdeclareimage{UzLlogo1}{}%
+			\UzL@logoOneusedfalse%
+		\or %2
+			\pgfdeclareimage{UzLlogo2}{}%
+			\UzL@logoTwousedfalse%
+		\or %3
+			\pgfdeclareimage{UzLlogo3}{}%
+			\UzL@logoTwousedfalse%
+		\else
+			\PackageError{beamerthemeUzL}{A Logo #1 can't be deleted.}{The Logo index should be between including 1 and 3.}%
+		\fi%
+}
+
+%
+% Load Theme depending on Option theme
+%
+\useinnertheme{UzL}%
+\ifnum\value{UzL@Theme}=0%0 Standard Theme use UzL
+	\useoutertheme{UzL}%
+	\usecolortheme{UzL}%
+\fi
+\ifnum\value{UzL@Theme}=1%0 Standard Theme use ITM
+	\useoutertheme{ITM}%
+	\usecolortheme{ITM}%
+\fi
+\ifnum\value{UzL@Theme}>1 %Error0 Standard Theme use ITM
+\PackageError{beamerthemeUzL}{Theme not recognized!}%
+\fi
+%
+% Rest to some standard values
+%
+\setbeamertemplate{blocks}[rounded]
+\setbeamertemplate{items}[ball]
+\setbeamertemplate{sections/subsections in toc}[ball]
+
+\mode<all>
+\makeatletter

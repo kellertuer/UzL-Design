@@ -1,0 +1,187 @@
+%
+% Alternate Outer Theme based on an idea by the Intitute of Telematics
+%
+% Declaration of Options, definition of specific commands the the design elements,
+% such as headline, footline and frametitle
+%
+% Also alternates the UzLplain to ITMplain style for the title page
+%
+% Published under Beeware-License:
+%
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+% can do whatever you want with this stuff. If we meet some day, and you think 
+% this stuff is worth it, you can buy me a beer or coffee in return.
+%
+% Lukas <ruge@itm.uni-luebeck.de> then took all of this and played with it until it looked like he wanted.
+% This is not the original theme but a play on it. It throws a shit load of warnings, which are all his fault so all beer and coffee for this goes to Ronny, the blame 
+% can rest on Lukas.
+%
+
+
+\ProvidesPackage{beamerouterthemeITM}[2011/10/05 v0.9 beamer theme in the corporate design of the University of Luebeck using darker colors]
+
+%
+% Change the Column outputcommand in comparison to the usual definition
+%
+\makeatletter
+
+% For the Output the navigation may be disabled by the first parameter,
+% all other data is taken from the private variables of the logos
+% Optionen
+% - 1 und Navigation (2 Spalten 316666666667% / 63.3333333333 %, in zweiter Navigation optional, beide links)
+% - 2 immer ohne Navigation (2 Spalten 47.5% beide´, links, rechts)
+% - 3 und Navigation (2 Spalten 31.666667 alle 3, links mitte rechts)
+%
+\newcommand{\UzL@ITMLogoColumnOutput}[1]{%
+	\if#1N %switches automatically to 1 logo + navigation
+		\hspace{-.006\paperwidth} %hack :(
+		\begin{beamercolorbox}[wd=\paperwidth,ht=.9\UzL@headheight,vmode,left]{author in head/foot}
+ 		\hspace{.02\UzL@innerwidth} \ifUzL@logoOneused\pgfuseimage{UzLlogo1}\vspace{.1\UzL@headheight}\fi%
+  		\end{beamercolorbox}
+		%\baselineskip
+		\begin{beamercolorbox}[wd=\UzL@innerwidth,ht=.75\UzL@headheight,vmode,left]{}
+   			\insertnavigation{\UzL@innerwidth}\vspace{.1\UzL@headheight}
+  		\end{beamercolorbox}
+		\begin{beamercolorbox}[wd=\paperwidth,ht=.25\UzL@headheight,vmode,left]{author in head/foot}
+		  \hspace{.02\UzL@innerwidth} \usebeamerfont{date in head/foot}\insertsubsection \vspace{.06\UzL@headheight}
+  		\end{beamercolorbox}
+	\else % Never display navigation
+	\ifcase \value{UzL@logonum} %depending on the number of logos
+		\or %1 Logo
+		\begin{beamercolorbox}[wd=\paperwidth,ht=.9\UzL@headheight,vmode,left]{author in head/foot}
+ 		\hspace{.02\UzL@innerwidth} \ifUzL@logoOneused\pgfuseimage{UzLlogo1}\vspace{.1\UzL@headheight}\fi%
+  		\end{beamercolorbox}
+		\or %2 logos
+		\begin{beamercolorbox}[wd=.5\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+	  		\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.5\UzL@innerwidth,ht=\UzL@headheight,vmode,right]{}
+  			\hfill
+	  		\ifUzL@logoTwoused\pgfuseimage{UzLlogo2}\fi
+  		\end{beamercolorbox}
+		\or %3 logos
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{author in head/foot}
+	  		\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,center]{}
+	  		\ifUzL@logoTwoused\pgfuseimage{UzLlogo2}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,right]{}
+			\ifUzL@logoThreeused\pgfuseimage{UzLlogo3}\fi
+  		\end{beamercolorbox}
+		\fi%
+	\fi%
+}
+%
+% Std. Logo
+%
+\IfFileExists {logos/unilogo300dpi_white.png}
+{%
+\setlogo{1}{.18\paperwidth}{logos/unilogo300dpi_white.png}%
+}{%
+\ClassWarningNoLine{beamerthemeUzL}{%
+Missing Logo: File logo/unilogo300dpi_white.png not found!}{}
+}
+%
+% White Slogan
+%
+\pgfdeclareimage[height=2.75mm]{uzlslogan}{logos/slogan_white.png}
+
+\defbeamertemplate*{footline}{ITM}
+{%
+	\ifUzL@showfootline
+		\leavevmode%
+		\centering
+		\hbox{%
+		\begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor%
+			\ifx\insertshortinstitute\@empty%
+			\ %
+			\else%
+				~~(\insertshortinstitute)%
+			\fi%
+			\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+			\begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+				\usebeamerfont{title in head/foot}\insertshorttitle
+			\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+			\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+				\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+				\insertframenumber{}%
+				\ifUzL@displayTotalFramenumber%
+					/ \inserttotalframenumber%
+				\fi%
+				\hspace*{6ex}%
+			\end{beamercolorbox}
+		}%
+		%\vskip.022\paperheight
+\fi
+}
+
+\defbeamertemplate*{headline}{ITM} 
+{ 
+\leavevmode
+		\ifUzL@displayNavigation%
+			\UzL@ITMLogoColumnOutput{N}%
+		\else%
+			\UzL@ITMLogoColumnOutput{}%
+		\fi%
+		\strut
+		\par
+		\vskip.5\baselineskip
+		\hspace{.02\paperwidth}
+}
+
+%
+% Plain Style for the titlepage
+%
+
+\defbeamertemplate{footline}{ITMplain}{}
+
+\defbeamertemplate{headline}{ITMplain} 
+{ 
+\leavevmode%
+	\UzL@ITMLogoColumnOutput{}%
+		\strut
+		\par
+}
+
+%
+% Title page stuff
+%
+\defbeamertemplate*{frametitle}{ITM}
+{%
+	\nointerlineskip%
+	\begin{beamercolorbox}[wd=\UzL@innerwidth,leftskip=.3cm,rightskip=.3cm plus1fil,vmode]{frametitle}
+		\vskip.5ex%
+		\par{\usebeamerfont*{frametitle}\insertframetitle\strut\par}%
+		\ifx\insertframesubtitle\@empty%
+			\strut\par%
+		\else
+			\vskip.25ex%
+			\par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+		\fi%%
+		\vskip.5ex%
+	\end{beamercolorbox}%
+	\nointerlineskip%
+}
+\setbeamersize{text margin left=2em,text margin right=2em}
+
+\renewcommand{\maketitle}[0]
+{%
+	\setbeamertemplate{headline}[ITMplain]%
+	\setbeamertemplate{footline}[ITMplain]%
+	\ifbeamer@inframe%
+		\vspace{1.3ex}%
+		\titlepage%
+	\else%
+		\frame[t]{\titlepage}%
+	\fi%
+  	\setbeamertemplate{headline}[ITM]%
+	\setbeamertemplate{footline}[ITM]%
+}
+
+
+\mode
+<all>
+
+\makeatother

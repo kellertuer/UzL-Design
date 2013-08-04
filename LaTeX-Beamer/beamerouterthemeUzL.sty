@@ -1,0 +1,217 @@
+%
+% The UzL Outer Theme 
+%
+% using a rim (as declared in the corporate design
+%
+% Declaration the design elements, such as headline and footline
+%
+% Also includes a plain style for the title page.
+%
+% Published under Beeware-License:
+%
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+% can do whatever you want with this stuff. If we meet some day, and you think 
+% this stuff is worth it, you can buy me a beer or coffee in return.
+
+\makeatletter
+
+% For the Output the navigation may be disabled by the first parameter,
+% all other data is taken from the private variables of the logos
+% Optionen
+% - 1 und Navigation (2 Spalten 316666666667% / 63.3333333333 %, in zweiter Navigation optional, beide links)
+% - 2 immer ohne Navigation (2 Spalten 47.5% beide´, links, rechts)
+% - 3 und Navigation (2 Spalten 31.666667 alle 3, links mitte rechts)
+%
+\newcommand{\UzL@LogoColumnOutput}[1]{%
+	\if#1N %switches automatically to 1 logo + navigation
+		\ifnum\value{UzL@logonum}=0
+			\begin{beamercolorbox}[wd=.\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+				\insertnavigation{\UzL@innerwidth}
+			\end{beamercolorbox}
+		\else
+			\hspace{-.006\paperwidth} %hack :(
+			\vspace{-.5\baselineskip}
+			\begin{beamercolorbox}[wd=.33\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+				\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi%
+			\end{beamercolorbox}\hspace{-0.1pt}%Hacked up to now
+			\vspace{.5\baselineskip}
+			\begin{beamercolorbox}[wd=.67\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+				\insertnavigation{.67\UzL@innerwidth}
+			\end{beamercolorbox}
+		\fi
+	\else % Never display navigation
+	\ifcase \value{UzL@logonum} %depending on the number of logos
+		%Zero Logos
+		\begin{beamercolorbox}[wd=.\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+		\end{beamercolorbox}		
+		\or %1 Logo
+		\begin{beamercolorbox}[wd=.33\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+	  		\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi
+  		\end{beamercolorbox}
+		\begin{beamercolorbox}[wd=.67\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+			\ 
+		\end{beamercolorbox}
+		\or %2 logos
+		\begin{beamercolorbox}[wd=.5\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+	  		\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.5\UzL@innerwidth,ht=\UzL@headheight,vmode,right]{}
+  			\hfill
+	  		\ifUzL@logoTwoused\pgfuseimage{UzLlogo2}\fi
+  		\end{beamercolorbox}
+		\or %3 logos
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,left]{}
+	  		\ifUzL@logoOneused\pgfuseimage{UzLlogo1}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,center]{}
+	  		\ifUzL@logoTwoused\pgfuseimage{UzLlogo2}\fi
+  		\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
+		\begin{beamercolorbox}[wd=.333\UzL@innerwidth,ht=\UzL@headheight,vmode,right]{}
+			\ifUzL@logoThreeused\pgfuseimage{UzLlogo3}\fi
+  		\end{beamercolorbox}
+		\fi%
+	\fi%
+}
+%
+% Std. Logo
+%
+\IfFileExists {logos/unilogo300dpi.png}
+{%
+\setlogo{1}{.25\paperwidth}{logos/unilogo300dpi.png}%
+}{%
+\ClassWarningNoLine{beamerthemeUzL}{%
+Missing Logo: File logo/unilogo300dpi.png not found!}{}
+}
+%
+% Slogan Image
+%
+\pgfdeclareimage[height=2.75mm]{uzlslogan}{logos/slogan.png}
+
+%
+% Footline
+%
+\defbeamertemplate*{footline}{UzL}
+{%
+	\ifUzL@showfootline
+		\leavevmode%
+		\hskip.0235\paperwidth
+		\hbox{%
+			\begin{beamercolorbox}[wd=.33333333333\UzL@innerwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor%
+			\ifx\insertshortinstitute\@empty%
+			\ %
+			\else%
+				~~(\insertshortinstitute)%
+			\fi%
+			\end{beamercolorbox}\hspace{0pt}%Hacked up to now
+			\begin{beamercolorbox}[wd=.33333333333\UzL@innerwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+				\usebeamerfont{title in head/foot}\insertshorttitle
+			\end{beamercolorbox}\hspace{0pt}%Hacked up to now
+			\begin{beamercolorbox}[wd=.3333333333333\UzL@innerwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+				\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+				\insertframenumber{}%
+				\ifUzL@displayTotalFramenumber%
+					/ \inserttotalframenumber%
+				\fi%
+				\hspace*{2ex}%
+			\end{beamercolorbox}
+		}%
+		\ifnum\value{UzL@logonum}=0
+			\ifUzL@displayNavigation
+				\vskip.025\paperheight
+			\else
+				\vskip.045\paperheight
+			\fi
+		\else
+			\vskip.025\paperheight
+		\fi
+\fi
+}
+
+%
+% Head including the background colorbox
+%
+\newcommand{\UzL@backgroundbox}{%
+\ifnum\value{UzL@logonum}=0
+\begin{beamercolorbox}[wd=\UzL@innerwidth,ht=.91\paperheight,leftskip=.025\paperwidth,rightskip=.025\paperwidth  plus1fil,vmode]{palette primary}
+\end{beamercolorbox}
+\vspace{-.91\paperheight}
+\else
+\begin{beamercolorbox}[wd=\UzL@innerwidth,ht=.835\paperheight,leftskip=.025\paperwidth,rightskip=.025\paperwidth  plus1fil,vmode]{palette primary}
+\end{beamercolorbox}
+\vspace{-.835\paperheight}
+\fi
+}
+\defbeamertemplate*{headline}{UzL}{%\leavevmode
+\vskip.5\baselineskip%
+\hspace{.02\paperwidth}% Header Output
+		\ifUzL@displayNavigation%
+			\UzL@LogoColumnOutput{N}%
+		\else%
+			\UzL@LogoColumnOutput{}%
+		\fi%
+		\strut
+		\par
+		\vskip.5\baselineskip
+		\hspace{.02\paperwidth}
+		%
+		%create background color box
+		%
+		\UzL@backgroundbox
+}
+
+%
+% Plain Styles
+%
+\defbeamertemplate{footline}{UzLplain}{}
+
+\defbeamertemplate{headline}{UzLplain}{\leavevmode%
+\vskip.5\baselineskip%
+\hspace{.02\paperwidth}
+	\UzL@LogoColumnOutput{}%
+		\strut
+		\par
+		\vskip.5\baselineskip
+		\hspace{.02\paperwidth}
+		%
+		%create background color box
+		%
+		\UzL@backgroundbox
+}
+
+%
+% Title page stuff
+%
+\defbeamertemplate*{frametitle}{UzL}
+{%
+	\nointerlineskip%
+	\begin{beamercolorbox}[wd=\UzL@innerwidth,leftskip=.3cm,rightskip=.3cm plus1fil,vmode]{frametitle}
+%		\vskip.5ex%
+		\par{\usebeamerfont*{frametitle}\insertframetitle\strut\par}%
+		\ifx\insertframesubtitle\@empty%
+			\strut\par%
+		\else
+			\vskip.25ex%
+			\par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+		\fi%%
+		\vskip.5ex%
+		%
+	\end{beamercolorbox}%
+	\nointerlineskip%
+}
+\setbeamersize{text margin left=2em,text margin right=2em}
+
+\renewcommand{\maketitle}[0]
+{%
+	\setbeamertemplate{headline}[UzLplain]%
+	\setbeamertemplate{footline}[UzLplain]%
+	\ifbeamer@inframe%
+		\vspace{1.3ex}%
+		\titlepage%
+	\else%
+		\frame[t]{\titlepage}%
+	\fi%
+  	\setbeamertemplate{headline}[UzL]%
+	\setbeamertemplate{footline}[UzL]%
+}
+\makeatletter

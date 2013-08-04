@@ -1,0 +1,43 @@
+%
+% Inner Theme elements, e.g. the titlepage definition
+%
+% Published under Beeware-License:
+%
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+% can do whatever you want with this stuff. If we meet some day, and you think 
+% this stuff is worth it, you can buy me a beer or coffee in return.
+
+%
+%
+% Title Page
+%
+%
+\defbeamertemplate*{title page}{UzL}
+{
+	\mbox{}\vfill
+	\centering
+	{
+		\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle\par
+		\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle
+	}%
+	\vskip6ex
+			{
+		    	\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor\par
+			\vskip6ex
+			}
+			{\usebeamerfont*{institute}
+			\small
+		    	\usebeamercolor[fg]{institute}\usebeamerfont{institute}\insertinstitute\par
+			\vskip6ex
+			}
+			{
+	    		\usebeamercolor[fg]{date}\usebeamerfont{date}\insertdate\par
+			}
+			\vskip4ex  
+			\vfill
+			\vskip1.8ex
+			\ifUzL@showslogan
+				\hfill\hskip-1.8em\pgfuseimage{uzlslogan}
+			\fi
+	\mbox{}
+}

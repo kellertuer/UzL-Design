@@ -1,0 +1,67 @@
+%
+% THE BEER-WARE LICENSE (Rev. 42):
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you
+% retain this notice you can do whatever you want with this stuff. If we meet
+% some day, and you think this stuff is worth it, you can buy me a beer or
+% coffee in return.
+%
+% This file is just to get started - You need the corresponding Logo
+%
+\documentclass[german,10pt,xcolor=colortbl,compress
+%,draft
+]{beamer}
+\usepackage{xunicode}
+\usepackage[T1]{fontenc}
+\usepackage{calc}
+\usepackage[ngerman]{babel} % Neue Rechtschreibung
+\usepackage{amsmath,amsthm,amssymb,euscript} % AMS-LaTeX  
+\usepackage{enumerate,graphicx}
+
+% Load Them
+\usetheme[footline=false, slogan=false, navigation=false]{UzL}
+%
+\setbeamertemplate{navigation symbols}{}
+\title{Beispielpräsentation}
+\subtitle{Eines Vortrages im neuen Design mit \LaTeX}
+\date[]{5. Februar 2011\\[1ex] Workshop on Corporate Design Stuff}
+\author[R. Bergmann]{Ronny Bergmann}
+% Clear Logo 1 to make the head smaller
+\institute[Universität zu Lübeck]{Institut für Mathematik\\Universität zu Lübeck}
+%\clearlogo{1}
+\setlogo{1}{.25\paperwidth}{logos/unilogo300dpi.png}%
+
+\begin{document}
+	\maketitle	
+	\section{Einleitung}
+	\begin{frame}{}
+		\tableofcontents
+	\end{frame}
+	\subsection{A}
+	\begin{frame}{Einleitung - Motivation}
+	ABC
+	\begin{lemma}[Ein Beispiellemma]
+		Ist das hier und es gilt.
+	\end{lemma}
+	\begin{example}
+		Ein Beispiel, wie dieses hier
+	\end{example}
+	\alert{ACHTUNG!}
+		Etwas Hervorgehobenes. Die Farben sind bisher alle dem Handbuch zum Corporate Design entnommen.
+	\end{frame}
+	\clearlogo{1}
+	\subsection{B}
+	\begin{frame}{Ein Beweis}{Mit Untertitel}
+			\begin{proof}
+				Weil.
+			\end{proof}
+	\end{frame}
+	\begin{frame}[plain]{}{}%Ohne Titel und Untertitel damits ganz leer und weiß ist
+		Ich bin so ein leerer Frame
+	\end{frame}
+	
+	\begin{frame}{TODO}
+		\begin{itemize}
+			\item Literatur?
+		\end{itemize}
+	\end{frame}
+\end{document}

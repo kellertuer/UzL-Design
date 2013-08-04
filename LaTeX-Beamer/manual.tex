@@ -1,0 +1,195 @@
+%
+% THE BEER-WARE LICENSE (Rev. 42):
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you
+% retain this notice you can do whatever you want with this stuff. If we meet
+% some day, and you think this stuff is worth it, you can buy me a beer or
+% coffee in return.
+%
+\documentclass[a4paper,DIV=calc, oneside]{scrartcl}
+\usepackage[no-math]{fontspec} 
+\usepackage{xunicode,xltxtra} 
+\defaultfontfeatures{Scale=MatchLowercase} 
+\usepackage{amsmath,amsthm,euscript} % AMS-LaTeX  
+\defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+\setsansfont[Ligatures={Common}]{Myriad Pro}
+\setromanfont[Ligatures={Common}]{Minion Pro}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{MnSymbol}
+
+\usepackage{calc,scrpage2}
+\usepackage{listings,wrapfig, enumerate}
+\usepackage[ngerman]{babel} % Neue Rechtschreibung
+\usepackage{graphicx,hyperref,booktabs}
+\usepackage[pdftex,dvipsnames]{xcolor}
+\definecolor{UzLcolor}{cmyk}{1,.0,.20,.78}
+\definecolor{UzLred}{cmyk}{0,.87,.89,.24}
+
+%\colorlet{maincolor}{black}
+\colorlet{mixcolor}{black!50}
+
+\lstloadlanguages{TeX}
+\lstset{basicstyle={\rmfamily\small},numbers=left,numberstyle=\tiny\color{UzLcolor},numbersep=5pt, breaklines=true, captionpos={t},language={},frame=none,numbers=left,tabsize=3, showspaces=false, showtabs=false, columns=fixed}	
+\setlength{\parindent}{1em} 
+\setlength{\parskip}{0em}	
+\setlength{\marginparwidth}{3cm}
+\colorlet{maincolor}{black!80}
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+\hypersetup{ 
+   pdftitle={LaTeX-Beamer Theme im Corporate Design der Universität zu Lübeck},%
+   pdfauthor={Ronny Bergmann},%
+   pdfcreator={LaTeX, KOMA-Script, TextMate},
+   pdfkeywords={LaTeX, Beamer, Theme, UzL, Universität zu Lübeck},
+   pdfdisplaydoctitle,
+   bookmarksnumbered=true,
+   bookmarksopen=true,
+   bookmarksopenlevel=1,
+   plainpages=false,
+   bookmarksnumbered,
+   pdfborder={0 0 0},
+linkcolor=UzLcolor,
+urlcolor=UzLcolor
+   }
+
+\addtokomafont{sectioning}{\color{UzLcolor}}
+\setkomafont{descriptionlabel}{\bfseries\color{UzLcolor}}
+\newcommand{\todo}[1]{{\color{red}!}\marginpar{\textrm{\color{red}#1}}}
+\newcommand{\missing}{{\color{red}!}}
+\newcommand{\missingcmd}[1]{\marginpar{\color{UzLcolor}\textrm{#1}\ {\color{red}!}}}
+\newcommand{\cmd}[1]{\marginpar{\color{UzLcolor}\textrm{#1}}}
+
+\defpagestyle{plain}%
+{{\includegraphics[height=2\baselineskip]{logos/unilogo300dpi.png}}{}{}}%
+{{\includegraphics[height=2\baselineskip]{logos/unilogo300dpi.png}}{}{}}%
+
+
+
+  \setheadwidth[0pt]{textwithmarginpar}
+  \setheadsepline[\textwidth]{current}[]
+  
+  \newcommand{\pagenumboxright}{%
+%		\colorbox{UzLcolor!20}{
+			\parbox[c][4ex][c]{\marginparwidth}{{\color{gray}$\bigl|$}\hspace{1.5em}\thepage}
+%		}
+	}
+	  \newcommand{\pagenumboxleft}{%
+	%		\colorbox{UzLcolor!20}{
+				\parbox[c][4ex][c]{\marginparwidth}{\thepage\hspace{1.5em}{\color{gray}$\bigl|$}}
+	%		}
+		}
+
+
+  \newcommand{\headerleftbox}{
+%		\colorbox{maincolor!20}{
+			\parbox[c][4ex][c]{\textwidth}{\quad\displaytitle\quad\quad\leftmark}
+%		}
+	}
+  \newcommand{\headerrightbox}{
+%		\colorbox{maincolor!20}{
+			\parbox[c][4ex][c]{\textwidth}{\quad\rightmark}
+%		}
+	}
+  \renewcommand{\headfont}{%
+		%\color{maincolor}%
+		\footnotesize}
+  
+  % left header
+  \newcommand{\myleftheader}{%
+    \setlength{\fboxsep}{0pt}%
+    \pagenumboxleft%
+    \hfill\headerleftbox%
+  }
+
+  % right header
+  \newcommand{\myrightheader}{%
+    \setlength{\fboxsep}{0pt}%
+    \headerrightbox\hfill\pagenumboxright%
+  }
+
+  % left footer
+  \newcommand{\myleftfooter}{\normalfont%\thepage
+	\hfill}
+
+  % right footer
+  \newcommand{\myrightfooter}{\hfill\normalfont%\thepage
+			}
+
+% defining pagestyle
+  \defpagestyle{mypagestyle}%
+    {{\myleftheader}{\myrightheader}{\myrightheader}}%
+    {{\myleftfooter}{\myrightfooter}{\myrightfooter}}%
+
+
+
+  \pagestyle{mypagestyle}
+
+%
+%
+% Dokumentanfang
+%
+%
+
+\begin{document}
+	\thispagestyle{empty}
+\title{\vspace{-3\baselineskip}Ein \textnormal{\LaTeX}-Beamer-Theme im Corporate-Design der Universität zu Lübeck\\{\large\normalfont Version 0.91}}
+\author{Ronny Bergmann\\\emph{bergmann@math.uni-luebeck.de}}
+\date{Januar 2011}
+\maketitle
+\section{Einleitung}
+Seit der Einführung des Corporate Design für die Universität zu Lübeck im April 2010 sind viele Schritte zu einem einheitlichen Auftreten der Universität unternommen worden. Dieses \LaTeX-Beamer-Theme überträgt nun die Ideen der
+Powerpoint-Vorlage auf \LaTeX. Dabei ist der Standard so orientiert, dass exakt die Folien wie in der Vorlage entstehen.
+
+Zusätzlich gibt es viele Optionen, die eine Anpassung ermöglichen, etwa bezüglich weiterer Logo-Einblendunden oder
+einer Fußzeile mit Folienzahlen, die in \LaTeX\ häufig Verwendung findet. Die Einstellungen können direkt beim Einbinden als Optionen gegeben werden, aber auch später neu gesetzt werden.
+
+Dabei sind Stellen, die mit \missing\  markiert sind, noch nicht implementiert.
+
+\section{Paketoptionen}
+Eine Übersicht mit Stichpunktartiger Erklärung findet sich in Tabelle \ref{tab:Paketoptionen}
+\begin{table}[hbt]
+	\begin{tabular}{llll}
+		\toprule
+		\textbf{Paketoption} & \textbf{Beschreibung}\\\midrule
+		\lstinline!footline=true|false! & Anzeige der Fußzeile an bzw. \textbf{aus}\\
+		\lstinline!navigation=true|false! & Navigations-Zeile neben dem Logo \textbf{an} bzw. aus.\\
+		\lstinline!frametotal=true|false! & Anzeige der Gesamtfolienanzahl \textbf{an} bzw. aus\\
+		\lstinline!slogan=true|false! & Anzeige des Slogans „Im Focus das Leben“ \textbf{an} bzw. aus\\
+		\lstinline!myriad=true|false! & Verwendung der Hausschriftart Myriad Pro \textbf{an} bzw. aus\\
+		\lstinline!ITMtheme! & Verwendung der dunkleren Theme-Vorlage des Instituts für Telematik\\
+		\lstinline!UzLTheme! & Verwendung des Standard-Themes der Universität (Standard)\\\bottomrule
+	\end{tabular}
+	\caption{Paketoptionen, die bei Aktivierung des Themes mitgegeben werden können. Der Standardwert ist jeweils hervorgehoben}
+	\label{tab:Paketoptionen}
+\end{table}
+\section{Befehle}
+Mit dem Befehl \lstinline!\maketitle!\cmd{\textbackslash maketitle} wird eine Titelseite ohne Navigation gesetzt. Dieser Stil läßt sich auch vor einer Folie explizit durch Verwendung des Befehls\\ \lstinline!\setbeamertemplate{headline}[UzLplain]!\cmd{[UzLplain]} setzen. Alle darauffolgenden Folien sind dann ohne Navigation in der Kopfzeile gesetzt. Auf gleichem Wege läßt sich die Fußleiste durch \lstinline!\setbeamertemplate{footline}[UzLplain]! ändern. Die Option \lstinline!![UzL]! hebt dies wieder auf.
+Wird der Befehl \lstinline!\maketitle! innerhalb einer Folie aufgerufen, wird das aktuelle Aussehen nicht verändert. Dies ist analog mit \lstinline![ITM]! bzw. \lstinline!ITMplain! auch für das Theme des Instituts für Telematik umgesetzt.
+
+Die Logos im Header lassen sich mit dem Befehl \lstinline!\setlogo[3]!\cmd{\textbackslash setlogo} verändern. Dieser Befehl erfordert 3 Parameter. Zunächst die Nummer des Logos, dann die gewünsche Breite und schlussendlich die Bilddatei des Logos. Die Anzahl der Logos ist auf 3 beschränkt, so dass bei der Breite höchstens ein Drittel der Textbreite zu empfehlen ist.
+
+Für das Theme der Universität empfielt sich eine Breite des Uni-Logos von \lstinline!.25\textwidth! und für das Theme des Instituts für Telematik \lstinline!.18\textwidth!, da dieses schmäler gesetzt ist.
+
+Ein Logo wird linksbündig gesetzt, das zweite rechtsbündig und das dritte mittig. Ist die Navigation auf sichtbar gestellt, werden nur auf der Titelfolie alle 3 Logos angezeigt, auf den darauffolgenden nur das erste Logo linksbündig und daneben die Navigation. Ohne die Navigation werde stets alle definierten Logos angezeigt.
+
+Möchte man während der Präsentation die Logos ändern, geschieht dies ebenso mit dem Befehl \lstinline!\setlogo!. Zum entfernen setzt man entweder den Parameter der Bilddatei auf leer oder nutzt den Befehl \lstinline!\clearlogo!\cmd{\textbackslash clearlogo}, der als Parameter lediglich die Nummer des Logos benötigt.
+
+\section{Mögliche weitere Features}
+Das Theme könnte am besten auch per Option \lstinline!theme=UzL|ITM! gewählt werden. Dies ist jedoch nicht ganz so einfach umsetzbar, daher in der aktuellen Version noch auskommentiert und durch die beiden obigen Paketoptionen ersetzt.
+
+Für Literatur liegen standardisierte Stile aus LaTeX-Beamer vor. Hier könnte man mit einem eigenen Buch/Artikel-Icon einen eigenen Stil etablieren, der zum Corporate Design passt. Für weitere Ideen und Erweiterungsvorschläge steht die Homepage zur Verfügung (s. Abschnitt \ref{sec:HP}).
+
+\section{Bekannte Probleme}
+Die Verwendung der Hausschriftart Myriad Pro stellt unter \LaTeX\ als eine Herausforderung dar. Momentan funktioniert das Paket nur im Zusammenspiel mit dem etwas neueren XeTeX-Compiler, eine Anpassung auch an \lstinline!pdflatex! wäre aufgrund der Kompatibilität wünschenswert. Auf die Installation der Schrift soll hier nicht eingegangen werden.
+\section{weitere Quellen des Paketes}\label{sec:HP}
+Es existiert ein Git-Repository, dass unter der Adresse\\ \href{https://github.com/kellertuer/LaTeXBeamerUzL}{https://github.com/kellertuer/LaTeXBeamerUzL}\\
+erreichbar ist.
+\section{Lizenz}
+Die Vorlage ist unter der Beerware-Lizenz veröffentlicht. Diese lautet:\\[1\baselineskip]
+\textrm{"THE BEER-WARE LICENSE" \ (Rev. 42):\\
+Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you retain this notice you
+can do whatever you want with this stuff. If we meet some day, and you think 
+this stuff is worth it, you can buy me a beer or coffee in return.}
+\end{document}
