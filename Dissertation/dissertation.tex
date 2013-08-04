@@ -1,0 +1,362 @@
+% Dissertations-Vorlage angelehnt an das Corporate Design der Universität zu Lübeck
+%
+% geschrieben von Ronny Bergmann, 4. August 2013
+% CC-BY-SA
+%
+% Dokumentklasse
+\documentclass[
+cleardoublepage=empty,	% leere Seite beim Kapitel komplett leer
+fontsize=11pt,			% Schriftgröße: 11pt
+a4paper,				% Format: DIN A4
+toc=bibliography,		% Literatur ins Inhaltsverzeichnis
+listof=leveldown,		% Einbinden von List of Figures/List of Tables ins Inhaltsverzeichnis
+twoside,				% Zweiseitiges Layout
+BCOR=13mm,				% Bundstegkorrektur
+headinclude=true,		% Kopfzeile gehört zur Texthöhe
+footinclude=false,		% ...Fußzeile nicht
+parskip=half,			% zwischen zwei Absätzen eine halbe Zeilenhöhe Platz
+DIV=10					% Typearea: Seiten in 10x10 teilen, um den Satzspiegel zu bestimmen
+%,draft					% für schnellere Kompilierung das Kommentar entfernen, dann keine Grafiken 
+]{scrbook}				% KOMA-Skript-Buchklasse
+%
+%
+%
+% Pakete (fold)
+%
+	%
+	% Zeichensatz
+	\usepackage[utf8]{inputenc} % Zeichensatz: UTF 8
+	\usepackage[T1]{fontenc} % Schriftzeichensatz: europäisch
+	\usepackage[german]{babel} % Neue Rechtschreibung und Silbentrennung
+	%
+	% Farben
+	\usepackage[dvipsnames,table]{xcolor} % Farben
+	%
+	% Seitenlayout
+	\usepackage{scrpage2}
+	%
+	% Grafiken
+	\usepackage{graphicx}
+	%
+	% Titelanpassugnen
+	\usepackage{titlesec,scalefnt}
+	%
+	% Inhaltsanpassungen
+	\usepackage{titletoc}
+	%
+	% Mathematische Pakete
+	\usepackage[fleqn]{amsmath}
+	\usepackage{amssymb,amsthm}
+	%
+	% Bild- und Teilbildunterschriften (hypcap setzt den Anker vernünftig
+	\usepackage[hypcap=true]{caption}
+	\usepackage[hypcap=true]{subcaption}
+	%
+	% Listen
+	\usepackage{enumitem}
+	\usepackage{tikz}
+	%
+	% Tabellen
+	\usepackage{booktabs,colortbl,longtable}
+	%
+	% Quelltext-Einbinden
+	\usepackage[final]{listings}
+	%
+	% Hyperref - load after pagestyle due to captionsredefinition there
+	\usepackage{url}
+	\usepackage{hyperref}
+	\usepackage[all]{hypcap}	% Link to start of figures, not captions
+	%
+	% Literatur
+	\usepackage[numbers,sort]{natbib}
+% (end)
+%
+%
+%
+% Einstellungen & globale Variablen (fold)
+	%
+	% Name, Titel und andere Einstellungen
+	\newcommand{\UzLAutor}{Ronny Bergmann} 	% Name
+	\newcommand{\UzLAutorKurz}{R. Bergmann} % Name short
+	\newcommand{\UzLGeburtsort}{Hamburg} % Birth place
+	\newcommand{\UzLTitel}{Translationsinvariante Räume multivariater anisotroper Funktionen auf dem Torus} %Title
+	\newcommand{\UzLTitelFormatiert}{%
+	\LARGE\color{UzLcolor}\bfseries%
+	Translationsinvariante Räume multivariater%
+	% Zeilenumbruch (Line break)
+	\\[.5\baselineskip]%
+	anisotroper Funktionen auf dem Torus
+	} %Title with adapted line breaks
+	\newcommand{\UzLDatum}{August 2013} %Date (Month&Year)
+	\newcommand{\UzLgenauesDatum}{4. August 2013} %Date complete
+	% Üblicherweise Lübeck
+	\newcommand{\UzLOrt}{Lübeck} %Place you wrote the thesis
+	% Insitut und Leitung
+	\newcommand{\UzLInstitut}{Institut für Mathematik}
+	\newcommand{\UzLInstitutsLeitung}{Prof.~Dr.~J.~Prestin}
+	% Prügunsausschuss: Erst nach Prüfung ausfüllen (Supervisors, to be filled in _after_ Thesis defence)
+	\newcommand{\UzLVorsitzender}{ } % Head of Committee
+	\newcommand{\UzLEGutachter}{ } % Supervisor
+	\newcommand{\UzLZGutachter}{ } % Second Supervisor
+	\newcommand{\UzLVerteidigung}{ } % Date of Defense
+	\newcommand{\UzLDruck}{ } % Date of acceptance to print
+	%
+	% Farbe
+	\definecolor{UzLcolor}{cmyk}{1,.0,.20,.78} % Universitätsfarbe in CMYK
+%	\definecolor{UzLcolor}{cmyk}{0,0,0,.9} % In Graustufen diese Alternative wählen
+	%
+% (end)
+%
+%
+%
+% Seitenlayout (fold)
+%
+	%
+	% Seitenlayout setzen
+	\pagestyle{scrheadings}
+	\clearscrheadings
+	%innen: Kapitel Section
+	\rehead{\leftmark}\lohead{\rightmark}
+	%außen Seitenzahlen
+	\rofoot{\pagemark}\lefoot{\pagemark}
+	%
+	%
+	% Schriftart für Überschriften auf serifen, nur bis subsubsection nummerieren
+	\setkomafont{sectioning}{\rmfamily\color{UzLcolor}\bfseries}
+	\setkomafont{title}{\color{UzLcolor}}
+	\setcounter{secnumdepth}{1} % Part/Chapter/Section mit Nummern 
+	%
+	% Listen-Einstellungen
+	\setlist{itemsep=.5\baselineskip,leftmargin=1.5em}
+	\setlist[enumerate,1]{label=\alph*)}
+	%
+	%
+	% Vermeidung von Hurenkindern und Schusterjungen
+	\clubpenalty=10000
+	\widowpenalty=10000
+	\displaywidowpenalty=10000
+	%
+	% Eigene Theorema-Umgebungen
+	\newtheoremstyle{normalstyle}% ⟨name⟩
+		{\baselineskip}%	⟨Space above⟩
+		{}%	⟨Space below⟩
+		{\normalfont}%	⟨Body font⟩
+		{}%	⟨Indent amount⟩
+		{\normalfont\bfseries}% ⟨Theorem head font⟩
+		{.\newline}%	⟨Punctuation after theorem head⟩
+		{.5\baselineskip}%	⟨Space after theorem head⟩
+		{}%	⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+	\theoremstyle{normalstyle}
+	\newtheorem{thm}{Theorem}[chapter]
+	\newtheorem{lem}[thm]{Lemma}
+	\newtheorem{kor}[thm]{Korollar}
+	\newtheorem{definition}[thm]{Definition}
+	\newtheorem{rem}[thm]{Bemerkung}
+	\newtheorem{ex}[thm]{Beispiel}
+	%
+	% Abbildungsformatierung
+	\DeclareCaptionLabelSeparator{periodspace}{.\ }
+	\captionsetup{format=hang,labelsep=periodspace,indention=-2cm,labelfont=bf,width=.9\textwidth,skip=.5\baselineskip}
+	\captionsetup[table]{position=above}
+	\captionsetup[sub]{labelfont=bf,labelsep=period,labelformat=mysublabelfmt,subrefformat=simple}
+	%
+	% Optik der Quelltexte mit eigenem Stil
+	\renewcommand{\lstlistlistingname}{Algorithmenverzeichnis}
+	\renewcommand{\lstlistingname}{Algorithmus}
+	\lstset{language=Mathematica}
+	\lstset{basicstyle={\sffamily\footnotesize},numbers=left,numberstyle=\tiny\color{UzLcolor},numbersep=5pt,
+	    breaklines=true,
+	    captionpos={t},
+	    frame={lines},rulecolor=\color{black},framerule=0.5pt,
+		mathescape, columns=flexible,
+		tabsize=2
+	}
+	\lstdefinestyle{mystyle}
+	{
+		keywordstyle=\bfseries,
+		numbers=left,
+		numberstyle=\tiny\color{UzLcolor},
+		numbersep=5pt,
+	    breaklines=true,
+		frame={lines},
+		rulecolor=\color{UzLcolor},
+		framerule=0.5pt,
+		backgroundcolor=\color{UzLcolor!5},
+		aboveskip=1em,
+		belowskip=1em,
+		showstringspaces=false,
+		tabsize=3,
+		framesep=0.75em
+	}	
+	%
+	% Chapter Style
+	\titleformat{\chapter}[display]%
+	    {\relax%
+			\raggedleft%
+			\huge\bfseries
+			\color{UzLcolor}%
+		}%
+	    {\Huge\raggedleft
+		\raggedleft{\textcolor{UzLcolor!25}{\scalefont{8}\thechapter}}}%
+	    {-.5\baselineskip} %
+	    {}
+	\titlespacing{\chapter}{0pt}{\baselineskip}{\baselineskip}
+	%
+	% Design of the table of contents
+	\titlecontents{chapter}[.5em]{\vspace{1\baselineskip}}{\contentslabel{1em}\large}{\large%\hspace*{-3.2em}
+		}{\titlerule*[0.5pc]{}{\large\contentspage}}[\vspace{.1\baselineskip}]
+	\titlecontents{section}[2.5em]{}{\contentslabel{2em}}{%\hspace*{-3.2em}
+		}{\titlerule*[0.5pc]{.}\contentspage}
+	\titlecontents{subsection}[3.5em]{}{\contentslabel{1.5em}}{%\hspace*{-3.2em}
+		}{\titlerule*[0.5pc]{.}\contentspage}
+	%
+	\makeatletter% --> Anpassung der Nummernbreite
+	\renewcommand*{\@pnumwidth}{1.7em}
+	\makeatother% --> \makeatletter
+% (end)
+%
+%
+%
+% PDF-Meta-Informationen (fold)
+	\hypersetup{
+		pdfauthor={\UzLAutor},
+		pdftitle={\UzLTitel},
+		pdfsubject={Dissertation},
+		pdfproducer={pdfLaTeX},
+		pdfcreator={YourEditor},
+		unicode=true,
+		pdfencoding=auto,
+		breaklinks=true,
+		plainpages=false,
+		pdfstartview=FitH,
+		pdfview=FitH,
+		pdfpagemode=UseOutlines,
+		bookmarksnumbered=true,
+		bookmarksopen=true,
+		bookmarksopenlevel=1,
+		pdfdisplaydoctitle=true,
+		pdfduplex=true,
+		pdflang=de,
+		colorlinks=true,
+		linkcolor=UzLcolor,
+		citecolor=black,
+		urlcolor=black
+	}
+% (end)
+%
+%
+%
+% Dokumentanfang (fold)
+\begin{document}
+	%
+	%
+	% Abschnitt vor dem eigentlichen Text
+	\frontmatter
+	%
+	% Titelseite (Umschlagseite) (fold)
+	\begin{titlepage}
+		\parskip=0pt
+		\parindent=0pt
+		% Notwendig: Eigenes Institutslogo
+		\includegraphics[width=91mm]{logos/institutslogo.eps}
+		\par
+		\vspace{6\baselineskip}
+		\UzLAutor
+		\par\vspace{\baselineskip}
+		{\UzLTitelFormatiert}
+		\par
+		\vspace{\baselineskip}
+		Dissertation.
+		\par
+	%	\vfill
+	%	Lübeck\grobesDatum
+	\end{titlepage}
+	\newpage
+	\thispagestyle{empty}
+	\ \\[2cm]
+	\begin{center}
+		\begin{tikzpicture} % 32 x 
+			\node at (-16mm,0) [circle,fill=black!50,inner sep=.5pt] {};
+			\node at (16mm,0) [circle,fill=black!50, inner sep=.5pt] {};
+			\draw[thin, black!50] (-16mm,0mm) rectangle (16mm,-42mm);
+			\node at (0,-21mm) [circle,inner sep=.5pt,black!50] {Passfoto};		
+			\node at (17.5mm,-44mm) [below left] {\small\color{black} \UzLAutorKurz};
+		\end{tikzpicture}
+	\end{center}
+	\cleardoublepage
+	% (end)
+	%
+	% Zweite Titelseite (mit offiziellem Text) (fold)
+		{
+			\parskip=0pt
+			\parindent=0pt
+			\thispagestyle{empty}
+			Aus dem \UzLInstitut\par
+			der Universität zu Lübeck\par
+			Institutsdirektor: \UzLInstitutsLeitung\par
+			\vspace{6\baselineskip}
+			{\UzLTitelFormatiert}
+			\par
+			\vfill
+			Inauguraldissertation zur Erlangung der Doktorwürde der Universität zu Lübeck\par\vspace{.5\baselineskip}
+			--- aus der Sektion Informatik/Technik ---\par\vspace{.5\baselineskip}
+			vorgelegt von \UzLAutor\ aus \UzLGeburtsort.\par
+			\vspace{2\baselineskip}
+			Lübeck, im \UzLDatum
+			%
+			%\cleardoublepage
+			\newpage
+			\thispagestyle{empty}\ \par
+			\vfill
+			\begin{tabular}{l@{\hskip 5em}l}
+				Vorsitzender & \UzLVorsitzender\\\addlinespace\addlinespace
+				1. Berichterstatter & \UzLEGutachter\\
+				2. Berichterstatter & \UzLZGutachter\\\addlinespace\addlinespace\addlinespace\addlinespace
+				Tag der mündlichen Prüfung & \UzLVerteidigung\\
+			\end{tabular}
+			\\[\baselineskip]
+			Zum Druck genehmigt. Lübeck, den \UzLDruck
+			\cleardoublepage
+		}
+	% (end)
+	%
+	% Inhaltsverzeichnis
+	\tableofcontents
+	%
+	%
+	% Hauptteil (fold)
+	\mainmatter
+	\chapter{Einleitung}
+	Dies ist die Einleitung. Und ein Zitat~\citep{TestEntry}
+	\chapter{Grundlagen}
+	Grundlagen
+	% (end)
+	%
+	% Bibliothek
+	\bibliographystyle{abbrv}
+	\bibliography{literatur}
+	%
+	% weitere Verzeichnisse
+	\addchap{Verzeichnisse}
+	\begingroup
+		\let\chapter=\section
+		%
+		\listoffigures %Abbildungsverzeichnis
+		\lstlistoflistings %Quelltextverzeichnis
+		\listoftables %Tabellenverzechnis
+		% Add further lists here
+	\endgroup
+	\appendix
+	%
+	% Schlussteil
+	\backmatter
+		\cleardoublepage
+		\chapter*{wissenschaftlicher Werdegang} %scientific CV
+		\addcontentsline{toc}{chapter}{wissenschaftlicher Werdegang}
+		\begin{tabular}{rl}\toprule
+			& \UzLAutor\\\midrule
+			Geburtstag  & * in \UzLGeburtsort\\
+			\\\bottomrule
+		\end{tabular}
+\end{document}
+% (end)
