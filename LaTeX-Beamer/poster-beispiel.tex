@@ -1,0 +1,103 @@
+% Poster-Vorlage angelehnt an das Corporate Design der Universität zu Lübeck
+%
+% geschrieben von Ronny Bergmann, 4. August 2013
+%
+% THE BEER-WARE LICENSE (Rev. 42):
+% Ronny Bergmann <bergmann@math.uni-luebeck.de> wrote this file. As long as you
+% retain this notice you can do whatever you want with this stuff. If we meet
+% some day, and you think this stuff is worth it, you can buy me a beer or
+% coffee in return.
+%
+\documentclass[german,12pt,xcolor=colortbl%
+%,draft
+]{beamer}
+\usepackage{xunicode} 
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+\usepackage[T1]{fontenc}
+\usepackage{calc}
+\usepackage[ngerman]{babel} % Deutsch
+\usepackage{amsmath,amsthm,amssymb,euscript} % AMS-LaTeX  
+\usepackage{enumitem}
+\usepackage[numbers,sort]{natbib}
+\usepackage{subfigure,caption,tikz,booktabs}
+
+% UzL-Theme laden (liegt im gleichen Verzeichnis oder unter LaTeX-Beamer)
+\usetheme[footline=true, slogan=false, myriad=true, navigation=false,ITMtheme]{UzL}
+% deaactivate
+\setbeamertemplate{navigation symbols}{}
+% Umdefinieren der Kopf- und Fußzeile
+\defbeamertemplate*{headline}{UzLNew} 
+{ 
+\leavevmode
+\vskip-4\baselineskip
+\hspace{.028\paperwidth}
+		\strut
+		\par
+		\vskip\baselineskip
+		\hspace{.02\paperwidth}
+}
+\defbeamertemplate*{footline}{UzLNew}{%
+		\centering
+		\vspace{-1cm}
+		\par\strut
+		\begin{beamercolorbox}[wd=.3\textwidth,ht=2.75ex,left]{}%
+			Hier könnte ein Projekttext stehen
+		\end{beamercolorbox}
+		\begin{beamercolorbox}[wd=.6\textwidth,ht=2.75ex,left]{}%
+			\( ^\ast \)Institut für Mathematik\\[.5\baselineskip]
+ 			Universität zu Lübeck\\[.5\baselineskip]
+			Ratzeburger Allee 160\\[.5\baselineskip]
+ 			23562 Lübeck
+		\end{beamercolorbox}
+		\vskip1.5\baselineskip%.012\paperheight
+}
+\setbeamersize{text margin left=5cm,text margin right=5cm}
+\setbeamercolor{title2}{bg=uzlmain,fg=white}
+\setbeamercolor{title3}{bg=uzlmain!75,fg=white}
+\setlength{\parskip}{.5\baselineskip}
+\setlength{\parindent}{0pt}
+\newcommand{\mySec}[1]{\vspace{1\baselineskip}\par{\Large\color{uzlmain}#1}\par\vspace{.5\baselineskip}}
+\begin{document}
+\begin{frame}[t]%
+%
+% Titel
+	\vspace{-1.1cm}
+	\strut\par
+	\includegraphics[width=273mm]{logos/institutslogo} %91*3
+%	\\[.5\baselineskip]
+	\vspace{.9\baselineskip}
+	\begin{beamercolorbox}[wd=\textwidth,sep=\baselineskip,leftskip=-.25em]{title2}
+		\parbox[t]{.95\textwidth}{\Huge Titel\\Zweite Zeile}
+			\vspace{\baselineskip}
+			\par
+			Ronny Bergmann\( ^{\ast} \)\\{\small bergmann@math.uni-luebeck.de}\vspace{-.5\baselineskip}
+		\end{beamercolorbox}
+%
+%
+% Inhalt
+ 	\begin{columns}[t,totalwidth=\textwidth]
+%		Erste Spalte
+ 		\begin{column}{.49\textwidth}
+			\vspace{-.5\baselineskip}
+ 			\mySec{Einleitung}
+			Ein erster Absatz mit Testtext und Zitat~\citep{TestEntry}.
+			\mySec{Vorgehensweise}
+			...weiter
+ 		\end{column}
+%		Zweite Spalte
+		\begin{column}{.49\textwidth}
+		\mySec{weiter in der zweiten Spalte}
+		Mit mehr Text
+		%FILL - TEMP
+		\vspace{50\baselineskip}
+		%
+		% Literatur
+		\par{\color{uzlmain}Literatur}\par
+ 		{\small
+			\bibliographystyle{abbrv}
+ 			\bibliography{literatur}
+ 		}
+		\end{column}
+	\end{columns}
+\end{frame}
+\end{document}
