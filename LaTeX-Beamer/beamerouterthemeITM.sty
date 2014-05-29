@@ -106,9 +106,21 @@ Missing Logo: File logo/unilogo300dpi_white.png not found!}{}
 			\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
 			\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
 				\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-				\insertframenumber{}%
-				\ifUzL@displayTotalFrameNumber%
-					/ \inserttotalframenumber%
+				\ifUzL@reduceTotalFrameNumber%fancy&still useless reduction ;)
+		\pgfmathtruncatemacro{\numerator}{%
+	\insertframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+		\pgfmathtruncatemacro{\denominator}{%
+	\inserttotalframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+					\ifnum\denominator=1%
+						\numerator%
+					\else%
+						\numerator/\denominator%
+					\fi%
+				\else%
+					\insertframenumber{}%
+					\ifUzL@displayTotalFrameNumber%
+						/ \inserttotalframenumber%
+					\fi%
 				\fi%
 				\hspace*{6ex}%
 			\end{beamercolorbox}

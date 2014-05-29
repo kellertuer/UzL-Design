@@ -81,13 +81,22 @@
 %  Option: Display Total Frame Number in Footline (only inf visible) on_/off
 %
 \newif\ifUzL@displayTotalFrameNumber%
+\newif\ifUzL@reduceTotalFrameNumber%
+\UzL@reduceTotalFrameNumberfalse%
 %
 \DeclareOptionBeamer{frametotal}[true]{\csname UzL@displayTotalFrameNumber#1\endcsname}
 \ExecuteOptionsBeamer{frametotal}
 % alternate
-\DeclareOptionBeamer{displayframetotal}{\Uzl@displayTotalFrameNumbertrue}
-\DeclareOptionBeamer{hideframetotal}{\Uzl@displayTotalFrameNumberfalse}
-
+\DeclareOptionBeamer{displayframetotal}{%
+	\Uzl@displayTotalFrameNumbertrue%
+	\UzL@reduceTotalFrameNumberfalse}
+\DeclareOptionBeamer{hideframetotal}{%
+	\Uzl@displayTotalFrameNumberfalse%
+	\UzL@reduceTotalFrameNumberfalse}
+\DeclareOptionBeamer{reducedframetotal}{%
+	\UzL@displayTotalFrameNumbertrue%
+	\UzL@reduceTotalFrameNumbertrue%
+}
 %
 %  Option: Display Total Frame Number in Footline (only inf visible) on_/off
 %

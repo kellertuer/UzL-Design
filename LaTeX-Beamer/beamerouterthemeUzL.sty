@@ -92,9 +92,9 @@ Missing Logo: File logo/unilogo300dpi.png not found!}{}
 %
 \defbeamertemplate*{footline}{UzL}
 {%
-	\ifUzL@showfootline
+	\ifUzL@showfootline%
 		\leavevmode%
-		\hskip.0235\paperwidth
+		\hskip.0235\paperwidth%
 		\hbox{%
 			\begin{beamercolorbox}[wd=.33333333333\UzL@innerwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
 			\usebeamerfont{author in head/foot}\insertshortauthor%
@@ -108,10 +108,23 @@ Missing Logo: File logo/unilogo300dpi.png not found!}{}
 				\usebeamerfont{title in head/foot}\insertshorttitle
 			\end{beamercolorbox}\hspace{0pt}%Hacked up to now
 			\begin{beamercolorbox}[wd=.3333333333333\UzL@innerwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-				\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-				\insertframenumber{}%
-				\ifUzL@displayTotalFrameNumber%
-					/ \inserttotalframenumber%
+				\usebeamerfont{date in head/foot}\insertshortdate{}%
+				\hspace*{2em}%
+				\ifUzL@reduceTotalFrameNumber%fancy&still useless reduction ;)
+		\pgfmathtruncatemacro{\numerator}{%
+	\insertframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+		\pgfmathtruncatemacro{\denominator}{%
+	\inserttotalframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+					\ifnum\denominator=1%
+						\numerator%
+					\else%
+						\numerator/\denominator%
+					\fi%
+				\else%
+					\insertframenumber{}%
+					\ifUzL@displayTotalFrameNumber%
+						/ \inserttotalframenumber%
+					\fi%
 				\fi%
 				\hspace*{2ex}%
 			\end{beamercolorbox}
