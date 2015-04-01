@@ -74,8 +74,8 @@
 \DeclareOptionBeamer{myriad}[true]{\csname UzL@useMyriad#1\endcsname}
 \ExecuteOptionsBeamer{myriad=true}
 % alternate commands
-\DeclareOptionBeamer{usemyriad}{\Uzl@useMyriadtrue}
-\DeclareOptionBeamer{nomyriad}{\Uzl@useMyriadfalse}
+\DeclareOptionBeamer{usemyriad}{\UzL@useMyriadtrue}
+\DeclareOptionBeamer{nomyriad}{\UzL@useMyriadfalse}
 
 %
 %  Option: Display Total Frame Number in Footline (only inf visible) on_/off
@@ -127,7 +127,13 @@
 \setlength{\UzL@innerwidth}{.95\paperwidth}
 \newlength{\UzL@headheight}
 \setlength{\UzL@headheight}{.1\paperheight}
-
+%
+% Manual Frame Number
+%
+\newcommand{\UzL@insertMFN}{\@empty}
+\newcommand{\setNextFrameNumber}[1]{%
+	\renewcommand{\UzL@insertMFN}{#1}%
+}
 \ProcessOptionsBeamer
 
 % After Processing Options the variable is correct so load Myriad (Standard)

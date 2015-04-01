@@ -106,21 +106,26 @@ Missing Logo: File logo/unilogo300dpi_white.png not found!}{}
 			\end{beamercolorbox}\hspace{-1pt}%Hacked up to now
 			\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
 				\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-				\ifUzL@reduceTotalFrameNumber%fancy&still useless reduction ;)
-		\pgfmathtruncatemacro{\numerator}{%
-	\insertframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
-		\pgfmathtruncatemacro{\denominator}{%
-	\inserttotalframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
-					\ifnum\denominator=1%
-						\numerator%
+				\setbox0=\hbox{\UzL@insertMFN\unskip}\ifdim\wd0=0pt
+					\ifUzL@reduceTotalFrameNumber%fancy&still useless reduction ;)
+						\pgfmathtruncatemacro{\numerator}{%
+						\insertframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+						\pgfmathtruncatemacro{\denominator}{%
+						\inserttotalframenumber/gcd(\insertframenumber,\inserttotalframenumber)}%
+						\ifnum\denominator=1%
+							\numerator%
+						\else%
+							\numerator/\denominator%
+						\fi%
 					\else%
-						\numerator/\denominator%
+						\insertframenumber{}%
+						\ifUzL@displayTotalFrameNumber%
+							/ \inserttotalframenumber%
+						\fi%
 					\fi%
 				\else%
-					\insertframenumber{}%
-					\ifUzL@displayTotalFrameNumber%
-						/ \inserttotalframenumber%
-					\fi%
+					\UzL@insertMFN%
+					\global\def\UzL@insertMFN{}%
 				\fi%
 				\hspace*{6ex}%
 			\end{beamercolorbox}
